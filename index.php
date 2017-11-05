@@ -2,7 +2,9 @@
 require_once('bdd.php');
 
 
-$sql = "SELECT id, title, start, end, color FROM events ";
+$sql = <<<SQL
+SELECT id, title, start, end, backgroundColor FROM events 
+SQL;
 
 $req = $bdd->prepare($sql);
 $req->execute();
@@ -22,13 +24,13 @@ $events = $req->fetchAll();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Bare - Start Bootstrap Template</title>
+    <title>SoM Course Scheduler</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-	
+    <link href="dist/bootstrap.min.css" rel="stylesheet">
+
 	<!-- FullCalendar -->
-	<link href='css/fullcalendar.css' rel='stylesheet' />
+	<link href='dist/fullcalendar.css' rel='stylesheet' />
 
 
     <!-- Custom CSS -->
@@ -89,26 +91,26 @@ $events = $req->fetchAll();
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1>FullCalendar BS3 PHP MySQL</h1>
-                <p class="lead">Complete with pre-defined file paths that you won't have to change!</p>
+                <p class="lead">Modified for SoM</p>
                 <div id="calendar" class="col-centered">
                 </div>
             </div>
-			
+
         </div>
         <!-- /.row -->
-		
+
 		<!-- Modal -->
 		<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
 			<div class="modal-content">
 			<form class="form-horizontal" method="POST" action="addEvent.php">
-			
+
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Add Event</h4>
 			  </div>
 			  <div class="modal-body">
-				
+
 				  <div class="form-group">
 					<label for="title" class="col-sm-2 control-label">Title</label>
 					<div class="col-sm-10">
@@ -116,18 +118,18 @@ $events = $req->fetchAll();
 					</div>
 				  </div>
 				  <div class="form-group">
-					<label for="color" class="col-sm-2 control-label">Color</label>
+					<label for="backgroundColor" class="col-sm-2 control-label">Color</label>
 					<div class="col-sm-10">
-					  <select name="color" class="form-control" id="color">
+					  <select name="backgroundColor" class="form-control" id="backgroundColor">
 						  <option value="">Choose</option>
 						  <option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
 						  <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-						  <option style="color:#008000;" value="#008000">&#9724; Green</option>						  
+						  <option style="color:#008000;" value="#008000">&#9724; Green</option>
 						  <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
 						  <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
 						  <option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
 						  <option style="color:#000;" value="#000">&#9724; Black</option>
-						  
+
 						</select>
 					</div>
 				  </div>
@@ -143,7 +145,7 @@ $events = $req->fetchAll();
 					  <input type="text" name="end" class="form-control" id="end" readonly>
 					</div>
 				  </div>
-				
+
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -153,9 +155,9 @@ $events = $req->fetchAll();
 			</div>
 		  </div>
 		</div>
-		
-		
-		
+
+
+
 		<!-- Modal -->
 		<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
@@ -166,7 +168,7 @@ $events = $req->fetchAll();
 				<h4 class="modal-title" id="myModalLabel">Edit Event</h4>
 			  </div>
 			  <div class="modal-body">
-				
+
 				  <div class="form-group">
 					<label for="title" class="col-sm-2 control-label">Title</label>
 					<div class="col-sm-10">
@@ -174,32 +176,32 @@ $events = $req->fetchAll();
 					</div>
 				  </div>
 				  <div class="form-group">
-					<label for="color" class="col-sm-2 control-label">Color</label>
+					<label for="backgroundColor" class="col-sm-2 control-label">Color</label>
 					<div class="col-sm-10">
-					  <select name="color" class="form-control" id="color">
+					  <select name="backgroundColor" class="form-control" id="backgroundColor">
 						  <option value="">Choose</option>
 						  <option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
 						  <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-						  <option style="color:#008000;" value="#008000">&#9724; Green</option>						  
+						  <option style="color:#008000;" value="#008000">&#9724; Green</option>
 						  <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
 						  <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
 						  <option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
 						  <option style="color:#000;" value="#000">&#9724; Black</option>
-						  
+
 						</select>
 					</div>
 				  </div>
-				    <div class="form-group"> 
+				    <div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 						  <div class="checkbox">
 							<label class="text-danger"><input type="checkbox"  name="delete"> Delete event</label>
 						  </div>
 						</div>
 					</div>
-				  
+
 				  <input type="hidden" name="id" class="form-control" id="id">
-				
-				
+
+
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -214,32 +216,69 @@ $events = $req->fetchAll();
     <!-- /.container -->
 
     <!-- jQuery Version 1.11.1 -->
-    <script src="js/jquery.js"></script>
+    <script src="dist/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-	
+    <script src="dist/bootstrap.min.js"></script>
+
 	<!-- FullCalendar -->
-	<script src='js/moment.min.js'></script>
-	<script src='js/fullcalendar.min.js'></script>
-	
+	<script src='dist/moment.min.js'></script>
+	<script src='dist/fullcalendar.js'></script>
+
 	<script>
 
 	$(document).ready(function() {
-		
+
 		$('#calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,basicWeek,basicDay'
+				right: 'quarter,month,agendaWeek,agendaDay,weekMTuF'
 			},
-			defaultDate: '2016-01-12',
-			editable: true,
+            views: {
+                weekMTuF: {
+                    type: 'quarter',
+                    buttonText: 'MoTuFr',
+                    hiddenDays: [ 0, 3, 6 ],
+                    fixedWeekCount : false,
+                    start: '2017-09-01',
+                    end: '2017-12-15',
+                    defaultDate: '2017-09-01',
+                    validRange: {
+                        start: '2017-08-01',
+                        end: '2018-01-01'
+                    }
+                }
+            },
+//            aspectRatio: 2,
+            defaultDate: '2017-09-01',
+            defaultView: 'weekMTuF',
+            allDaySlot: true,
+            allDayText: 'HOLD',
+            displayEventEnd: true,
+            defaultTimedEventDuration: '00:50:00',
+            defaultAllDayEventDuration: '00:50:00',
+            businessHours: {
+                // days of week. an array of zero-based day of week integers (0=Sunday)
+                dow: [1, 2, 3, 4, 5], // Monday - Friday
+
+                start: '09:30', // a start time (8am in this example)
+                end: '16:30' // an end time (6pm in this example)
+            },
+            minTime: '09:30:00',
+            maxTime: '12:30:00',
+            slotDuration: '00:10:00',
+            slotLabelInterval: 10,
+            slotLabelFormat: 'h(:mm)a',
+            slotMinutes: 10,
+
+//            defaultDate: new Date(),
+            editable: true,
 			eventLimit: true, // allow "more" link when too many events
 			selectable: true,
 			selectHelper: true,
 			select: function(start, end) {
-				
+
 				$('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
 				$('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
 				$('#ModalAdd').modal('show');
@@ -248,7 +287,7 @@ $events = $req->fetchAll();
 				element.bind('dblclick', function() {
 					$('#ModalEdit #id').val(event.id);
 					$('#ModalEdit #title').val(event.title);
-					$('#ModalEdit #color').val(event.color);
+					$('#ModalEdit #backgroundColor').val(event.backgroundColor);
 					$('#ModalEdit').modal('show');
 				});
 			},
@@ -263,8 +302,8 @@ $events = $req->fetchAll();
 
 			},
 			events: [
-			<?php foreach($events as $event): 
-			
+			<?php foreach($events as $event):
+
 				$start = explode(" ", $event['start']);
 				$end = explode(" ", $event['end']);
 				if($start[1] == '00:00:00'){
@@ -283,12 +322,12 @@ $events = $req->fetchAll();
 					title: '<?php echo $event['title']; ?>',
 					start: '<?php echo $start; ?>',
 					end: '<?php echo $end; ?>',
-					color: '<?php echo $event['color']; ?>',
+					backgroundColor: '<?php echo $event['backgroundColor']; ?>',
 				},
 			<?php endforeach; ?>
 			]
 		});
-		
+
 		function edit(event){
 			start = event.start.format('YYYY-MM-DD HH:mm:ss');
 			if(event.end){
@@ -296,14 +335,14 @@ $events = $req->fetchAll();
 			}else{
 				end = start;
 			}
-			
+
 			id =  event.id;
-			
+
 			Event = [];
 			Event[0] = id;
 			Event[1] = start;
 			Event[2] = end;
-			
+
 			$.ajax({
 			 url: 'editEventDate.php',
 			 type: "POST",
@@ -312,12 +351,12 @@ $events = $req->fetchAll();
 					if(rep == 'OK'){
 						alert('Saved');
 					}else{
-						alert('Could not be saved. try again.'); 
+						alert('Could not be saved. try again.');
 					}
 				}
 			});
 		}
-		
+
 	});
 
 </script>

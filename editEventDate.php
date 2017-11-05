@@ -16,12 +16,12 @@ if (isset($_POST['Event'][0]) && isset($_POST['Event'][1]) && isset($_POST['Even
 	$query = $bdd->prepare( $sql );
 	if ($query == false) {
 	 print_r($bdd->errorInfo());
-	 die ('Erreur prepare');
+	 die ('Error prepare');
 	}
 	$sth = $query->execute();
 	if ($sth == false) {
 	 print_r($query->errorInfo());
-	 die ('Erreur execute');
+	 die ('Error execute');
 	}else{
 		die ('OK');
 	}
