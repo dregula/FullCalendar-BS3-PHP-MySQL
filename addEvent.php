@@ -2,15 +2,15 @@
 
 require_once('bdd.php');
 //echo $_POST['title'];
-if (isset($_POST['title']) && isset($_POST['start']) && isset($_POST['end']) && isset($_POST['color'])){
+if (isset($_POST['title']) && isset($_POST['start']) && isset($_POST['end']) && isset($_POST['$backgroundColor'])){
 	
 	$title = $_POST['title'];
 	$start = $_POST['start'];
 	$end = $_POST['end'];
-	$color = $_POST['color'];
+	$backgroundColor = $_POST['$backgroundColor'];
 
 	$sql = <<<SQL
-INSERT INTO events(title, start, end, backgroundColor) values ('$title', '$start', '$end', '$color')
+INSERT INTO events(title, start, end, backgroundColor) values ('$title', '$start', '$end', '$backgroundColor')
 SQL;
 	//$req = $bdd->prepare($sql);
 	//$req->execute();
@@ -30,6 +30,5 @@ SQL;
 
 }
 header('Location: '.$_SERVER['HTTP_REFERER']);
-
 	
 ?>

@@ -290,6 +290,16 @@ $events = $req->fetchAll();
 					$('#ModalEdit #backgroundColor').val(event.backgroundColor);
 					$('#ModalEdit').modal('show');
 				});
+// TRY: 2017-11-04 show something when hover
+               element.popover({
+                    animation:true,
+                    delay: 300,
+                    content: '<b>Inicio</b>:'
+                        + moment(event.start).format('YYYY-MM-DD HH:mm')
+                        + "<b>Fin</b>:"
+                        + moment(event.end).format('YYYY-MM-DD HH:mm'),
+                    trigger: 'hover'
+                });
 			},
 			eventDrop: function(event, delta, revertFunc) { // si changement de position
 
@@ -322,7 +332,7 @@ $events = $req->fetchAll();
 					title: '<?php echo $event['title']; ?>',
 					start: '<?php echo $start; ?>',
 					end: '<?php echo $end; ?>',
-					backgroundColor: '<?php echo $event['backgroundColor']; ?>',
+					backgroundColor: '<?php echo $event['backgroundColor']; ?>'
 				},
 			<?php endforeach; ?>
 			]
@@ -337,11 +347,13 @@ $events = $req->fetchAll();
 			}
 
 			id =  event.id;
+            backgroundColor = event.backgroundColor;
 
 			Event = [];
 			Event[0] = id;
 			Event[1] = start;
 			Event[2] = end;
+			Event[3] = backgroundColor;
 
 			$.ajax({
 			 url: 'editEventDate.php',
