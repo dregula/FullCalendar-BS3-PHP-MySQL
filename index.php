@@ -34,18 +34,31 @@ $events = $req->fetchAll();
 
 
     <!-- Custom CSS -->
+    <!--suppress CssUnusedSymbol -->
     <style>
     body {
         padding-top: 70px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     }
 	#calendar {
-		max-width: 800px;
+/*		max-width: 800px; */
 	}
 	.col-centered{
 		float: none;
 		margin: 0 auto;
 	}
+    .calendar-container {
+        max-width: 1000px;
+    }
+    .calendar-container .fc-EightWeekMTuF-view {
+         overflow-x: scroll;
+    }
+    .calendar-container .fc-view > table {
+        width: 100%;
+    }
+    .calendar-container .fc-EightWeekMTuF-view > table {
+        width: 3000px;
+    }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -92,7 +105,9 @@ $events = $req->fetchAll();
             <div class="col-lg-12 text-center">
                 <h1>FullCalendar BS3 PHP MySQL</h1>
                 <p class="lead">Modified for SoM</p>
-                <div id="calendar" class="col-centered">
+                <div class="calendar-container">
+                    <div id="calendar" class="col-centered">
+                    </div>
                 </div>
             </div>
 
@@ -233,14 +248,29 @@ $events = $req->fetchAll();
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'quarter,month,agendaWeek,agendaDay,weekMTuF'
+				right: 'month,agendaWeek,EightWeekMTuF'
 			},
             views: {
                 weekMTuF: {
                     type: 'quarter',
                     buttonText: 'MoTuFr',
+                    hiddenDays: [0, 3, 6],
+                    fixedWeekCount: false,
+                    start: '2017-09-01',
+                    end: '2017-12-15',
+                    defaultDate: '2017-09-01',
+                    validRange: {
+                        start: '2017-08-01',
+                        end: '2018-01-01'
+                    }
+                },
+                EightWeekMTuF: {
+                    type: 'agenda',
+                    buttonText: '8MoTuFr',
                     hiddenDays: [ 0, 3, 6 ],
+                    duration : { weeks: 8 },
                     fixedWeekCount : false,
+                    columnFormat: 'ddd M/D',
                     start: '2017-09-01',
                     end: '2017-12-15',
                     defaultDate: '2017-09-01',
@@ -252,7 +282,7 @@ $events = $req->fetchAll();
             },
 //            aspectRatio: 2,
             defaultDate: '2017-09-01',
-            defaultView: 'weekMTuF',
+            defaultView: 'EightWeekMTuF',
             allDaySlot: true,
             allDayText: 'HOLD',
             displayEventEnd: true,
